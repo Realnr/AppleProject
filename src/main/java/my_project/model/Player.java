@@ -10,22 +10,35 @@ public class Player extends InteractiveGraphicalObject {
 
     //Attribute
     private double speed;
+    private double runSpeed;
+    private double walkSpeed;
     private int points;
+    private double stamina;
+    private double deltaTime;
+
 
     //Tastennummern zur Steuerung
     private int keyToGoLeft;
     private int keyToGoRight;
+    private int keyToAccelerate;
+
     private int direction;
+    private boolean canMover;
+    private boolean canMovel;
 
     public Player(double x, double y){
         this.x = x;
         this.y = y;
-        speed = 150;
+        walkSpeed = 150;
+        runSpeed = 250;
         width = 80;
         height = 40;
+        stamina = 10;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
+        this.keyToAccelerate = KeyEvent.VK_SHIFT;
+
         this.direction      = -1; //-1 keine Bewegung, 0 nach rechts, 2 nach links
     }
 
@@ -40,31 +53,56 @@ public class Player extends InteractiveGraphicalObject {
     @Override
     public void update(double dt) {
         //TODO 05 Überarbeiten Sie die Update-Methode derart, dass ein Player-Objekt nicht den Bildschirm verlassen kann und immer zu sehen ist.
-        if(direction == 0){
+        if(direction == 0 && canMover){
             x = x + speed*dt;
         }
-        if(direction == 2){
+        if(direction == 2 && canMovel){
             x = x - speed*dt;
         }
-    }
+        if(x<=0){
+            canMovel = false;
+        }else {
+            canMovel = true;
+        }
+        if(x>=1000-width){
+            canMover = false;
+        }else {
+            canMover = true;
+        }
+        if(stamina <= 10){
+            stamina += 10*dt;
+        }
+        deltaTime = dt;
 
+    }
     @Override
     public void keyPressed(int key) {
         if(key == keyToGoLeft){
             direction = 2;
+
         }
         if(key == keyToGoRight){
             direction = 0;
         }
+        if(key == keyToAccelerate && stamina > 0){
+            speed = runSpeed;
+            stamina -= 10*deltaTime;
+        }else {
+            speed = walkSpeed;
+        }
+        //if(key != keyToGoLeft && key != keyToGoRight){
+          //  direction = -1;
+        //}
     }
 
     @Override
     public void keyReleased(int key) {
-        if(key == keyToGoLeft){
+        if(key == keyToGoLeft && direction == 2){
             direction = -1;
         }
-        if(key == keyToGoRight){
+        if(key == keyToGoRight && direction == 0){
             direction = -1;
         }
+
     }
 }
