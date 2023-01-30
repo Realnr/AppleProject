@@ -30,11 +30,13 @@ public class Pear extends GraphicalObject {
         y += speed*dt;
         if(y>1029){
             jumpBack();
+            Player.setLives(Player.getLives()-1);
         }
     }
     public void jumpBack(){
         y = 0;
         x = Math.random()*975;
+        speed += 3;
     }
     //TODO 04 Lege eine Methode jumpBack() an, die bei Aufruf das Pear-Objekt oben am oberen Bildschirmrand an einer zufälligen x-Position positioniert.
 }

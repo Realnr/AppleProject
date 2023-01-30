@@ -29,11 +29,13 @@ public class Apple extends GraphicalObject {
         y += speed*dt;
         if(y > 1000 + radius){
             jumpBack();
+            Player.setLives(Player.getLives()-1);
         }
     }
     public void jumpBack(){
         y = 0;
         x = Math.random()*950+25;
+        speed += 3;
     }
     //TODO 02 Lege eine Methode jumpBack() an, die bei Aufruf das Apple-Objekt oben am oberen Bildschirmrand an einer zufälligen x-Position positioniert.
 }

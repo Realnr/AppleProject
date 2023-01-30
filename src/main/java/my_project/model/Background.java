@@ -2,6 +2,8 @@ package my_project.model;
 
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
+//import my_project.control.ProgramController;
+import java.awt.*;
 
 /**
  * Die Background-Klasse stellt die Umsetzung eines Objekts für den Hintergrund des Apple-Games dar.
@@ -24,15 +26,32 @@ public class Background extends GraphicalObject {
 
     public Background(){
         chosenPhrase = phrases[(int)(Math.random()*phrases.length)];
+        this.setNewImage("src/main/resources/graphic/Heartpng 99x10.png");
     }
 
     @Override
     public void draw(DrawTool drawTool) {
+
+
         drawTool.setCurrentColor(25,100,0,255);
         drawTool.drawFilledRectangle(0,0,1600,1024);
         drawTool.setCurrentColor(0,0,0,255);
-        drawTool.formatText("Arial",1,25);
-        drawTool.drawText(450,50,chosenPhrase);
+        drawTool.formatText("Arial",1,20);
+        drawTool.drawText(50,50,chosenPhrase);
+        drawTool.setCurrentColor(Color.blue);
+        drawTool.drawFilledRectangle(50,130,Player.getStamina()*6 ,40);
+        drawTool.setCurrentColor(0,0,0,255);
+        drawTool.formatText("Arial",1,20);
+        drawTool.drawText(50,105,"Points:" + Player.getPoints());
+        if(Player.getLives() >= 1){
+            drawTool.drawImage(this.getMyImage(),50,180);
+            if(Player.getLives() >= 2){
+                drawTool.drawImage(this.getMyImage(),150,180);
+                if(Player.getLives() >= 3){
+                    drawTool.drawImage(this.getMyImage(),250,180);
+                }
+            }
+        }
     }
 
     @Override

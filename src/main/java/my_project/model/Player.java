@@ -4,6 +4,9 @@ import KAGO_framework.model.InteractiveGraphicalObject;
 import KAGO_framework.view.DrawTool;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import static KAGO_framework.control.ViewController.isKeyDown;
 
 public class Player extends InteractiveGraphicalObject {
 
@@ -12,9 +15,10 @@ public class Player extends InteractiveGraphicalObject {
     private double speed;
     private double runSpeed;
     private double walkSpeed;
-    private int points;
-    private double stamina;
+    private static int points;
+    private static double stamina;
     private double deltaTime;
+    private static int lives;
 
 
     //Tastennummern zur Steuerung
@@ -30,14 +34,16 @@ public class Player extends InteractiveGraphicalObject {
         this.x = x;
         this.y = y;
         walkSpeed = 150;
-        runSpeed = 250;
+        runSpeed = 360;
         width = 80;
         height = 40;
-        stamina = 10;
+        stamina = 30;
+        lives = 3;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
         this.keyToAccelerate = KeyEvent.VK_SHIFT;
+
 
         this.direction      = -1; //-1 keine Bewegung, 0 nach rechts, 2 nach links
     }
@@ -48,6 +54,7 @@ public class Player extends InteractiveGraphicalObject {
         drawTool.drawFilledRectangle(x,y,width,height);
         drawTool.setCurrentColor(0,0,0,255);
         drawTool.drawRectangle(x,y,width,height);
+
     }
 
     @Override
@@ -69,11 +76,19 @@ public class Player extends InteractiveGraphicalObject {
         }else {
             canMover = true;
         }
-        if(stamina <= 10){
+        if(stamina <= 30 && !isKeyDown(keyToAccelerate)){
             stamina += 10*dt;
         }
         deltaTime = dt;
-
+        if(isKeyDown(keyToAccelerate) && stamina > 0){
+            speed = runSpeed;
+            stamina -= 10*deltaTime;
+        }else {
+            speed = walkSpeed;
+        }
+        if(lives > 3 ){
+            lives = 3;
+        }
     }
     @Override
     public void keyPressed(int key) {
@@ -84,12 +99,7 @@ public class Player extends InteractiveGraphicalObject {
         if(key == keyToGoRight){
             direction = 0;
         }
-        if(key == keyToAccelerate && stamina > 0){
-            speed = runSpeed;
-            stamina -= 10*deltaTime;
-        }else {
-            speed = walkSpeed;
-        }
+
         //if(key != keyToGoLeft && key != keyToGoRight){
           //  direction = -1;
         //}
@@ -104,5 +114,29 @@ public class Player extends InteractiveGraphicalObject {
             direction = -1;
         }
 
+    }
+
+    public static int getPoints() {
+        return points;
+    }
+
+    public static void setPoints(int points) {
+        Player.points = points;
+    }
+
+    public static double getStamina() {
+        return stamina;
+    }
+
+    public static void setStamina(double stamina) {
+        Player.stamina = stamina;
+    }
+
+    public static int getLives() {
+        return lives;
+    }
+
+    public static void setLives(int lives) {
+        Player.lives = lives;
     }
 }
