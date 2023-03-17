@@ -8,7 +8,7 @@ public class Pear extends Fruit {
     //Attribute
     private double speed;
 
-    public Pear(double x, double y,Player player01){
+    public Pear(double x, double y,Player player01 ){
         super(x,y,player01);
         width = 25;
         height = 35;

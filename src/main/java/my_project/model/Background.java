@@ -31,8 +31,8 @@ public class Background extends GraphicalObject {
     }
 
 
-        @Override
-        public void draw (DrawTool drawTool){
+    @Override
+    public void draw (DrawTool drawTool){
 
 
         drawTool.setCurrentColor(25, 100, 0, 255);
@@ -45,23 +45,13 @@ public class Background extends GraphicalObject {
         drawTool.setCurrentColor(0, 0, 0, 255);
         drawTool.formatText("Arial", 1, 20);
         drawTool.drawText(50, 105, "Points:" + player.getPoints());
-        /*int i;
-        for(i = 0; i  <= 2; i++) {
-            if (player.getLives() >= i) ;
-            drawTool.drawImage(this.getMyImage(), 50 + i * 100, 180);
-        }
-        if (i == 2) {
-            i = -1;
-        }*/
-        if (player.getLives() >= 1) {
-            drawTool.drawImage(this.getMyImage(), 50, 180);
-            if (player.getLives() >= 2) {
-                drawTool.drawImage(this.getMyImage(), 150, 180);
-                if (player.getLives() >= 3) {
-                    drawTool.drawImage(this.getMyImage(), 250, 180);
-                }
+
+        for(int i = 0; i  <= 2; i++) {
+            if (player.getLives() >= i) {
+                drawTool.drawImage(this.getMyImage(), 50 + i * 100, 180);
             }
         }
+
     }
 
 
