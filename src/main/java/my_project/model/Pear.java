@@ -3,15 +3,13 @@ package my_project.model;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-public class Pear extends GraphicalObject {
+public class Pear extends Fruit {
 
     //Attribute
     private double speed;
 
-    public Pear(double x, double y){
-        this.x = x;
-        this.y = y;
-        speed = 150;
+    public Pear(double x, double y,Player player01){
+        super(x,y,player01);
         width = 25;
         height = 35;
     }
@@ -24,20 +22,6 @@ public class Pear extends GraphicalObject {
         drawTool.drawRectangle(x,y,width,height);
     }
 
-    @Override
-    public void update(double dt) {
-        //TODO 03 Eine Birne soll von oben herab fallen. Sobald sie unten den Bildschirmrand berührt wird die Methode jumpBack() aufgerufen (siehe TODO 04).
-        y += speed*dt;
-        if(y>1029){
-            jumpBack();
-            Player.setLives(Player.getLives()-1);
-        }
-    }
-    public void jumpBack(){
-        y = 0;
-        x = Math.random()*975;
-        speed += 3;
-    }
-    //TODO 04 Lege eine Methode jumpBack() an, die bei Aufruf das Pear-Objekt oben am oberen Bildschirmrand an einer zufälligen x-Position positioniert.
+
 }
 

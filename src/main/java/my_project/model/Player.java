@@ -15,10 +15,10 @@ public class Player extends InteractiveGraphicalObject {
     private double speed;
     private double runSpeed;
     private double walkSpeed;
-    private static int points;
+    private int points;
     private static double stamina;
     private double deltaTime;
-    private static int lives;
+    private int lives;
 
 
     //Tastennummern zur Steuerung
@@ -116,27 +116,27 @@ public class Player extends InteractiveGraphicalObject {
 
     }
 
-    public static int getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public static void setPoints(int points) {
-        Player.points = points;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
-    public static double getStamina() {
+    public double getStamina() {
         return stamina;
     }
 
-    public static void setStamina(double stamina) {
-        Player.stamina = stamina;
+    public void setStamina(double stamina) {
+        this.stamina = stamina;
     }
 
-    public static int getLives() {
+    public int getLives() {
         return lives;
     }
 
-    public static void setLives(int lives) {
-        Player.lives = lives;
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
