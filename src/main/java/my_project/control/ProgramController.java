@@ -19,7 +19,7 @@ public class ProgramController {
     private Apple apple01;
     private Pear pear01;
     private Player player;
-    private Fruit[] allFruits;
+    private Fruit[] allFruits = new Fruit[8];
 
     /**
      * Konstruktor
@@ -40,22 +40,15 @@ public class ProgramController {
         //StartScreen S = new StartScreen();
         player = new Player(50, Config.WINDOW_HEIGHT-400);
         Background B = new Background(player);
+        fillArray(allFruits);
 
 
-        //double xPos = Math.random() * (Config.WINDOW_WIDTH - 50) + 50;
-        //double yPos = 0;
-        apple01 = new Apple(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
 
-
-        //xPos = Math.random() * (Config.WINDOW_WIDTH - 50) + 50;
-        //yPos = 0;
-        pear01 = new Pear(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
 
         viewController.draw(B);
-        viewController.draw(pear01);
-        viewController.draw(apple01);
         viewController.draw(player);
         viewController.register(player);
+        drawAllFruits(allFruits,viewController);
 
     }
 
@@ -64,14 +57,20 @@ public class ProgramController {
      * @param dt Zeit seit letzter Frame
      */
     public void updateProgram(double dt){
-        collision(apple01);
-        collision(pear01);
+        System.out.println(allFruits[1].getY());
+        collision(allFruits);
+        collision(allFruits);
     }
-    public void collision(Fruit f){
-        if(f.collidesWith(player)){
-            f.jumpBack();
-            player.setPoints(player.getPoints()+1);
-            player.setLives(player.getLives()+1);
+    public void collision(Fruit[] allFruits){
+        for(int i = 0; i < allFruits.length;i++) {
+            if (allFruits[i].collidesWith(player)) {
+                allFruits[i].jumpBack();
+                player.setPoints(player.getPoints() + 1);
+                player.setLives(player.getLives() + 1);
+                if(allFruits[i] instanceof PowerApple){
+
+                }
+            }
         }
     }
     public void fillArray(Fruit[] Array){
@@ -83,9 +82,9 @@ public class ProgramController {
             }
         }
     }
-    public void drawAllFruits(Fruit[] Array){
+    public void drawAllFruits(Fruit[] Array,ViewController view){
         for(int i = 0; i < Array.length;i++){
-            viewController.draw(Array[i]);
+            view.draw(Array[i]);
         }
     }
 }

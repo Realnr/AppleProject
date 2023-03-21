@@ -139,4 +139,12 @@ public class Player extends InteractiveGraphicalObject {
     public void setLives(int lives) {
         this.lives = lives;
     }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 }
