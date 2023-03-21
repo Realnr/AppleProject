@@ -7,11 +7,13 @@ public class Pear extends Fruit {
 
     //Attribute
     private double speed;
+    private double sin;
 
     public Pear(double x, double y,Player player01 ){
         super(x,y,player01);
         width = 25;
         height = 35;
+        sin = 0;
     }
 
     @Override
@@ -22,6 +24,12 @@ public class Pear extends Fruit {
         drawTool.drawRectangle(x,y,width,height);
     }
 
+    @Override
+    public void update(double dt) {
 
+        super.update(dt);
+        sin += 10*dt;
+        x += Math.sin(sin)*10;
+    }
 }
 

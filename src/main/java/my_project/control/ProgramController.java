@@ -19,6 +19,7 @@ public class ProgramController {
     private Apple apple01;
     private Pear pear01;
     private Player player;
+    private Fruit[] allFruits;
 
     /**
      * Konstruktor
@@ -71,6 +72,20 @@ public class ProgramController {
             f.jumpBack();
             player.setPoints(player.getPoints()+1);
             player.setLives(player.getLives()+1);
+        }
+    }
+    public void fillArray(Fruit[] Array){
+        for(int i = 0; i < Array.length;i++){
+            if (i < Array.length/2) {
+                Array[i] = new Apple(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
+            }else{
+                Array[i] = new Pear(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
+            }
+        }
+    }
+    public void drawAllFruits(Fruit[] Array){
+        for(int i = 0; i < Array.length;i++){
+            viewController.draw(Array[i]);
         }
     }
 }
