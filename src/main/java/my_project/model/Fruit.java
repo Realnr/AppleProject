@@ -20,7 +20,7 @@ public class Fruit extends GraphicalObject {
         y += speed*dt;
         if(y > 1050){
             jumpBack();
-            player01.setLives(player01.getLives()-1);
+//            player01.setLives(player01.getLives()-1);
         }
     }
 

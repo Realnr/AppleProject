@@ -46,11 +46,11 @@ public class Background extends GraphicalObject {
         drawTool.formatText("Arial", 1, 20);
         drawTool.drawText(50, 105, "Points:" + player.getPoints());
 
-        for(int i = 0; i  <= 2; i++) {
-            if (player.getLives() >= i) {
-                drawTool.drawImage(this.getMyImage(), 50 + i * 100, 180);
-            }
-        }
+//        for(int i = 0; i  <= 2; i++) {
+//            if (player.getLives() >= i) {
+//                drawTool.drawImage(this.getMyImage(), 50 + i * 100, 180);
+//            }
+//        }
 
     }
 

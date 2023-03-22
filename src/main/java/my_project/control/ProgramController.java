@@ -16,10 +16,9 @@ public class ProgramController {
     // Referenzen
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
 
-    private Apple apple01;
-    private Pear pear01;
+
     private Player player;
-    private Fruit[] allFruits = new Fruit[8];
+    private Fruit[] allFruits = new Fruit[11];
 
     /**
      * Konstruktor
@@ -30,6 +29,7 @@ public class ProgramController {
      */
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
+
     }
 
     /**
@@ -48,7 +48,7 @@ public class ProgramController {
         viewController.draw(B);
         viewController.draw(player);
         viewController.register(player);
-        drawAllFruits(allFruits,viewController);
+        drawAllFruits(viewController);
 
     }
 
@@ -57,34 +57,40 @@ public class ProgramController {
      * @param dt Zeit seit letzter Frame
      */
     public void updateProgram(double dt){
-        System.out.println(allFruits[1].getY());
-        collision(allFruits);
-        collision(allFruits);
-    }
-    public void collision(Fruit[] allFruits){
-        for(int i = 0; i < allFruits.length;i++) {
-            if (allFruits[i].collidesWith(player)) {
-                allFruits[i].jumpBack();
-                player.setPoints(player.getPoints() + 1);
-                player.setLives(player.getLives() + 1);
-                if(allFruits[i] instanceof PowerApple){
+//        System.out.println(allFruits[1].getY());
+        collision();
 
+    }
+    public void collision(){
+        for(Fruit f : allFruits) {
+            if (f.collidesWith(player)) {
+                f.jumpBack();
+                player.setPoints(player.getPoints() + 1);
+//                player.setLives(player.getLives() + 1);
+                if(f instanceof PowerApple && player.getSpeed() < 250){
+                    player.setSpeed(player.getSpeed() + ((PowerApple) f).getSpeedBuff());
+                }else if(f instanceof rottenPear){
+                    player.setStamina(((rottenPear) f).getRot());
                 }
             }
         }
     }
     public void fillArray(Fruit[] Array){
         for(int i = 0; i < Array.length;i++){
-            if (i < Array.length/2) {
+            if (i < 4) {
                 Array[i] = new Apple(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
-            }else{
+            }else if(i < 8){
                 Array[i] = new Pear(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
+            }else if (i < 10) {
+                Array[i] = new PowerApple(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
+            }else if (i < 11) {
+                Array[i] = new rottenPear(Math.random() * (Config.WINDOW_WIDTH - 50) + 50, 0, player);
             }
         }
     }
-    public void drawAllFruits(Fruit[] Array,ViewController view){
-        for(int i = 0; i < Array.length;i++){
-            view.draw(Array[i]);
+    public void drawAllFruits(ViewController view){
+        for(Fruit f : allFruits){
+            view.draw(f);
         }
     }
 }

@@ -18,7 +18,7 @@ public class Player extends InteractiveGraphicalObject {
     private int points;
     private static double stamina;
     private double deltaTime;
-    private int lives;
+//    private int lives;
 
 
     //Tastennummern zur Steuerung
@@ -38,7 +38,7 @@ public class Player extends InteractiveGraphicalObject {
         width = 80;
         height = 40;
         stamina = 30;
-        lives = 3;
+//        lives = 3;
 
         this.keyToGoLeft    = KeyEvent.VK_A;
         this.keyToGoRight   = KeyEvent.VK_D;
@@ -86,9 +86,9 @@ public class Player extends InteractiveGraphicalObject {
         }else {
             speed = walkSpeed;
         }
-        if(lives > 3 ){
-            lives = 3;
-        }
+//        if(lives > 3 ){
+//            lives = 3;
+//        }
     }
     @Override
     public void keyPressed(int key) {
@@ -132,19 +132,19 @@ public class Player extends InteractiveGraphicalObject {
         this.stamina = stamina;
     }
 
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
+//    public int getLives() {
+//        return lives;
+//    }
+//
+//    public void setLives(int lives) {
+//        this.lives = lives;
+//    }
 
     public double getSpeed() {
-        return speed;
+        return walkSpeed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setSpeed(double walkSpeed) {
+        this.walkSpeed = walkSpeed;
     }
 }
