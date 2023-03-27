@@ -7,8 +7,8 @@ public class rottenPear extends Pear{
     private int rot;
 //    private double timer;
 
-    public rottenPear(double x, double y,Player player01){
-        super(x,y,player01);
+    public rottenPear(double x, double y){
+        super(x,y);
         rot = 0;
     }
 

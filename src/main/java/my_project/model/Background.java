@@ -4,6 +4,7 @@ import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 import my_project.control.ProgramController;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Die Background-Klasse stellt die Umsetzung eines Objekts für den Hintergrund des Apple-Games dar.
@@ -22,9 +23,9 @@ public class Background extends GraphicalObject {
             "\"Günde bir elma Doktoru uzak tutar.\" - Türkei",
             "\"Rojek sêvek doktor dûr dike\" - Kurdisch",
             "\"تفاحة على الريق تغنيك عن الطبيب\" - Arabisch"};
-    private Player player;
+    private Player[] player;
 
-    public Background(Player player){
+    public Background(Player[] player){
         chosenPhrase = phrases[(int)(Math.random()*phrases.length)];
         this.setNewImage("src/main/resources/graphic/Heartpng 99x10.png");
         this.player = player;
@@ -40,12 +41,15 @@ public class Background extends GraphicalObject {
         drawTool.setCurrentColor(0, 0, 0, 255);
         drawTool.formatText("Arial", 1, 20);
         drawTool.drawText(50, 50, chosenPhrase);
-        drawTool.setCurrentColor(Color.blue);
-        drawTool.drawFilledRectangle(50, 130, player.getStamina() * 6, 40);
+
+        for(int i = 0; i < player.length;i++) {
+            drawTool.setCurrentColor(Color.blue);
+            drawTool.drawFilledRectangle(50, 130 + i * 50, player[i].getStamina() * 6, 40);
+
+        }
         drawTool.setCurrentColor(0, 0, 0, 255);
         drawTool.formatText("Arial", 1, 20);
-        drawTool.drawText(50, 105, "Points:" + player.getPoints());
-
+        drawTool.drawText(50, 105, "Points:" + (player[0].getPoints() + player[1].getPoints() ));
 //        for(int i = 0; i  <= 2; i++) {
 //            if (player.getLives() >= i) {
 //                drawTool.drawImage(this.getMyImage(), 50 + i * 100, 180);

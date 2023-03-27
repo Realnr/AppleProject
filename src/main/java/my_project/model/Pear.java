@@ -9,8 +9,8 @@ public class Pear extends Fruit {
     private double speed;
     private double sin;
 
-    public Pear(double x, double y,Player player01 ){
-        super(x,y,player01);
+    public Pear(double x, double y){
+        super(x,y);
         width = 25;
         height = 35;
         sin = 0;

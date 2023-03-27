@@ -5,12 +5,11 @@ import KAGO_framework.model.GraphicalObject;
 public class Fruit extends GraphicalObject {
 
     protected double speed;
-    protected Player player01;
 
-    public Fruit(double x, double y,Player player01){
+    public Fruit(double x, double y){
         this.x = x;
         this.y = y;
-        this.player01 = player01;
+//        this.player01 = player01;
         speed = 150;
     }
 

@@ -6,8 +6,8 @@ public class PowerApple extends Apple {
 
     private int speedBuff;
 
-    public PowerApple(double x, double y,Player player01){
-        super(x,y,player01);
+    public PowerApple(double x, double y){
+        super(x,y);
         speedBuff = 8;
     }
     @Override

@@ -16,7 +16,7 @@ public class Player extends InteractiveGraphicalObject {
     private double runSpeed;
     private double walkSpeed;
     private int points;
-    private static double stamina;
+    private double stamina;
     private double deltaTime;
 //    private int lives;
 
@@ -30,19 +30,27 @@ public class Player extends InteractiveGraphicalObject {
     private boolean canMover;
     private boolean canMovel;
 
-    public Player(double x, double y){
+    public Player(double x, double y,int keyToGoRight,int keyToGoLeft, int keyToAccelerate){
         this.x = x;
         this.y = y;
+
         walkSpeed = 150;
         runSpeed = 360;
+
         width = 80;
         height = 40;
+
         stamina = 30;
+        Math.max(stamina,30);
+
+
+        points = 0;
+        Math.min(points,0);
 //        lives = 3;
 
-        this.keyToGoLeft    = KeyEvent.VK_A;
-        this.keyToGoRight   = KeyEvent.VK_D;
-        this.keyToAccelerate = KeyEvent.VK_SHIFT;
+        this.keyToGoLeft    = keyToGoLeft;
+        this.keyToGoRight   = keyToGoRight;
+        this.keyToAccelerate = keyToAccelerate;
 
 
         this.direction      = -1; //-1 keine Bewegung, 0 nach rechts, 2 nach links
@@ -76,13 +84,13 @@ public class Player extends InteractiveGraphicalObject {
         }else {
             canMover = true;
         }
-        if(stamina <= 30 && !isKeyDown(keyToAccelerate)){
-            stamina += 10*dt;
+        if(!isKeyDown(keyToAccelerate)){
+            stamina += 1*dt;
         }
         deltaTime = dt;
         if(isKeyDown(keyToAccelerate) && stamina > 0){
             speed = runSpeed;
-            stamina -= 10*deltaTime;
+            stamina -= 4*deltaTime;
         }else {
             speed = walkSpeed;
         }
