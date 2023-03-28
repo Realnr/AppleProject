@@ -23,6 +23,7 @@ public class ProgramController {
     private Player[] player = new Player[2];
     private Fruit[] allFruits = new Fruit[12];
 
+
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -74,6 +75,7 @@ public class ProgramController {
                     player.setPoints(player.getPoints() + 1);
                 }else {
                     player.setPoints(player.getPoints() - 1);
+                    ((Pear) f).setSpruchHinterlassen(true);
                 }
 //                player.setLives(player.getLives() + 1);
                 if(f instanceof PowerApple && player.getSpeed() < 250){

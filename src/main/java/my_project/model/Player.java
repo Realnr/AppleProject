@@ -84,8 +84,11 @@ public class Player extends InteractiveGraphicalObject {
         }else {
             canMover = true;
         }
-        if(!isKeyDown(keyToAccelerate)){
+        if(stamina <= 30 && !isKeyDown(keyToAccelerate)){
             stamina += 1*dt;
+        }
+        if(stamina > 30){
+            stamina =30;
         }
         deltaTime = dt;
         if(isKeyDown(keyToAccelerate) && stamina > 0){

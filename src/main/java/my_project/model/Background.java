@@ -14,8 +14,8 @@ import java.util.Arrays;
 public class Background extends GraphicalObject {
 
     //Referenzen
-    String chosenPhrase;
-    String[] phrases = new String[]{"\"An apple a day keeps the doctor away!\" - England",
+    private String chosenPhrase;
+    private String[] phrases = new String[]{"\"An apple a day keeps the doctor away!\" - England",
             "\"Eat an apple on going to bed, and you’ll keep the doctor from earning his bread.\" - Wales",
             "\"Ein Apfel am Tag, Arzt gespart!\" - Deutschland",
             "\"Una mela al giorno toglie il medico di torno.\" - Italien",
@@ -26,7 +26,7 @@ public class Background extends GraphicalObject {
     private Player[] player;
 
     public Background(Player[] player){
-        chosenPhrase = phrases[(int)(Math.random()*phrases.length)];
+        chosenPhrase = phrases[(int)(Math.random()*(phrases.length-1))];
         this.setNewImage("src/main/resources/graphic/Heartpng 99x10.png");
         this.player = player;
     }
@@ -57,8 +57,6 @@ public class Background extends GraphicalObject {
 //        }
 
     }
-
-
 
     @Override
     public void update(double dt) {

@@ -28,4 +28,5 @@ public class Fruit extends GraphicalObject {
         x = Math.random()*950+25;
         speed += 3;
     }
+
 }
