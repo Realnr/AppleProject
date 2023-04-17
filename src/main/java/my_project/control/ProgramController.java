@@ -70,12 +70,14 @@ public class ProgramController {
         for(Fruit f : allFruits) {
             for (Player player : player)
             if (f.collidesWith(player)) {
-                f.jumpBack();
+
                 if (f instanceof Apple || f instanceof Grape) {
                     player.setPoints(player.getPoints() + 1);
                 }else {
                     player.setPoints(player.getPoints() - 1);
                     ((Pear) f).setSpruchHinterlassen(true);
+                    ((Pear) f).settY(( f.getY()));
+                    ((Pear) f).settX(( f.getX()));
                 }
 //                player.setLives(player.getLives() + 1);
                 if(f instanceof PowerApple && player.getSpeed() < 250){
@@ -85,6 +87,7 @@ public class ProgramController {
                 }else if(f instanceof Grape){
                     player.setStamina(player.getStamina() + ((Grape) f).getStaminaBuff());
                 }
+                f.jumpBack();
             }
         }
     }
